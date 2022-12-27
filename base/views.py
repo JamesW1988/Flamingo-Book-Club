@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import BookDatabase
 from .forms import DatabaseForm
 
@@ -21,13 +21,22 @@ def database(request, pk):
 
 def aboutpage(request, pk):
     aboutpage = None
+
     for i in about:
         if i['id'] == int(pk):
             aboutpage = i
+
     context = {'aboutpage': aboutpage}    
     return render(request,'base/about.html', context)
 
 def databaseForm(request):
     form = DatabaseForm()
+
+    if request.method == 'POST':
+        form = DatabaseForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+
     context = {'form':form}
     return render(request, 'base/database_form.html', context)

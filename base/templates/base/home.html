@@ -11,7 +11,7 @@
     <div>
         {% for database in databases %}
             <div>
-                <h5>{{database.id}} -- <a href="{% url 'database' database.id %}">{{database.title}}</a></h5>
+                <h5><a href="{% url 'database' database.id %}">{{database.title}} -- {{database.author}}</a></h5>
             </div>
 
         {% endfor %}

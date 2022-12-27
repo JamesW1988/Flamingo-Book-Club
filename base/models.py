@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 
-
+#Creates the book database fields
 class BookDatabase(models.Model):
     title = models.CharField(max_length=100, unique=True)
     author = models.CharField(max_length=100)
@@ -12,6 +12,10 @@ class BookDatabase(models.Model):
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
 
-def __str__(self):
-    return self.title
-    
+    #orders the database by ascending title then author
+    class Meta:
+        ordering = ['title', 'author']
+
+    def __str__(self):
+        return self.title
+        
