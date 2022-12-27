@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .models import BookDatabase
 from .forms import DatabaseForm
 
+
 about = [
     {'id':1, 'name': 'How this got started'},
     {'id':2, 'name': 'Who is this program for'},
