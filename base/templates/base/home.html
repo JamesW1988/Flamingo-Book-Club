@@ -1,0 +1,23 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<h1>Home Template</h1>
+
+<div>
+
+    <a href ="{% url 'database-form' %}">Database Form</a>
+
+    <div>
+        {% for database in databases %}
+            <div>
+                <h5>{{database.id}} -- <a href="{% url 'database' database.id %}">{{database.title}}</a></h5>
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+
+</div>
+
+{% endblock content %}
