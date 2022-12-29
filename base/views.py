@@ -14,8 +14,8 @@ about = [
 def loginPage(request):
 
     if request.method == 'POST':
-        username = request.POST.get(username)
-        password = request.POST.get(password)
+        username = request.POST.get('username')
+        password = request.POST.get('password')
 
         try:
             user = User.objects.get(username = username)
