@@ -2,12 +2,67 @@
 
 {% block content %}
 
-<div>
-    <form method="POST" action="">
-        {% csrf_token %}
-        {{form.as_p}}
-        <input type="submit" value="Submit" />
-    </form>
-</div>
+<style>
+    .database-container{
+        display: grid;
+        grid-template-columns: 1fr 5fr;
+    }
+</style>
 
+<div class="database-container">
+
+    <div>
+        <form method="POST" action="">
+            {% csrf_token %}
+            <div>
+                <label for="title"><strong>Title</strong><br></label>
+                {{ form.title }}
+              </div>
+              <div>
+                <label for="author"><strong>Author</strong><br></label>
+                {{ form.author }}
+              </div>
+              <div>
+                <label for="description"><strong>Description</strong><br></label>
+                {{ form.description }}
+              </div>
+              <div>
+                <label for="lexile_score"><strong>Lexile Score</strong><br></label>
+                {{ form.lexile_score }}
+              </div>
+              <div>
+                <label for="inventory"><strong>Inventory</strong><br></label>
+                {{ form.inventory }}
+              </div>
+            <input type="submit" value="Submit" />
+        </form>
+    </div>
+
+    <div>      
+        <div>
+            <table style="width: 100%;">
+                <thead style="margin: auto;">
+                    <tr>
+                        <th>Title</th>
+                        <th>Author</th>
+                        <th width:80%>Description</th>
+                        <th style="white-space:normal">Lexile Score</th>
+                        <th>Inventory</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for database in databases %}
+                <tr >
+                    <td>{{ database.title }}</td>
+                    <td>{{ database.author }}</td>
+                    <td style="white-space:normal" width: 80%>{{ database.description }}</td>
+                    <td>{{ database.lexile_score }}</td>
+                    <td>{{ database.inventory }}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+</div>
 {% endblock content %}

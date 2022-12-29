@@ -30,13 +30,14 @@ def aboutpage(request, pk):
     return render(request,'base/about.html', context)
 
 def databaseForm(request):
+    databases = BookDatabase.objects.all()
     form = DatabaseForm()
 
     if request.method == 'POST':
         form = DatabaseForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('home')
+            return redirect('database-form')
 
-    context = {'form':form}
+    context = {'form':form,'databases':databases}
     return render(request, 'base/database_form.html', context)

@@ -2,19 +2,48 @@
 
 {% block content %}
 
-<h1>Home Template</h1>
+<style>
+    .home-container{
+        display: grid;
+        grid-template-columns: 1fr 3fr;
+    }
+</style>
 
-<div>
-
-    <a href ="{% url 'database-form' %}">Database Form</a>
-
+<div class="home-container">
     <div>
-        {% for database in databases %}
+        <h3>Add Database Items</h3>
+    </div>
+
+    
+
+    <div>      
             <div>
-                <h5><a href="{% url 'database' database.id %}">{{database.title}} -- {{database.author}}</a></h5>
+                <a href="{% url 'database-form' %}">Database Form</a>
+                <table style="width: 100%">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Author</th>
+                            <th width:80%>Description</th>
+                            <th>Lexile Score</th>
+                            <th>Inventory</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for database in databases %}
+                    <tr >
+                        <td>{{ database.title }}</td>
+                        <td>{{ database.author }}</td>
+                        <td style="white-space:normal" width: 80%>{{ database.description }}</td>
+                        <td>{{ database.lexile_score }}</td>
+                        <td>{{ database.inventory }}</td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
             </div>
 
-        {% endfor %}
+        
 
     </div>
 
