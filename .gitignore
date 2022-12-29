@@ -1,0 +1,6 @@
+# Python virtual environments
+bookenv/
+venv/
+
+# Python cache
+__pycache__/
