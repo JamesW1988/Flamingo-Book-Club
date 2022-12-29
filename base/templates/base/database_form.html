@@ -7,32 +7,36 @@
         display: grid;
         grid-template-columns: 1fr 5fr;
     }
+    form{
+        width: 100%;
+    }
 </style>
 
 <div class="database-container">
 
-    <div>
-        <form method="POST" action="">
+    <div class="form">
+        <h3>Database Entry</h3>
+        <form method="POST" action="" style="width: 100%;">
             {% csrf_token %}
             <div>
                 <label for="title"><strong>Title</strong><br></label>
-                {{ form.title }}
+                {{ form.title }}    
               </div>
               <div>
-                <label for="author"><strong>Author</strong><br></label>
+                <label for="author"><strong><br>Author</strong><br></label>
                 {{ form.author }}
               </div>
               <div>
-                <label for="description"><strong>Description</strong><br></label>
+                <label for="description"><strong><br>Description</strong><br></label>
                 {{ form.description }}
               </div>
               <div>
-                <label for="lexile_score"><strong>Lexile Score</strong><br></label>
+                <label for="lexile_score"><strong><br>Lexile Score</strong><br></label>
                 {{ form.lexile_score }}
               </div>
               <div>
-                <label for="inventory"><strong>Inventory</strong><br></label>
-                {{ form.inventory }}
+                <label for="inventory"><strong><br>Inventory</strong><br></label>
+                {{ form.inventory }}<p></p>
               </div>
             <input type="submit" value="Submit" />
         </form>
@@ -40,7 +44,8 @@
 
     <div>      
         <div>
-            <table style="width: 100%;">
+            <h3>{{ row_count }} Rows</h3>
+            <table style="width: 100%;" border="1">
                 <thead style="margin: auto;">
                     <tr>
                         <th>Title</th>
