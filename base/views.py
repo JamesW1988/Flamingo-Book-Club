@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
+from django.db.models import Q
 from .models import BookDatabase
 from .forms import DatabaseForm
 
@@ -33,6 +35,10 @@ def loginPage(request):
     context = {}
     return render(request, 'base/login_register.html', context)
 
+def logoutUser(request):
+    logout(request)
+    return redirect('home')
+
 def home(request):
     databases = BookDatabase.objects.all()
     context = {'databases': databases }
@@ -53,10 +59,20 @@ def aboutpage(request, pk):
     context = {'aboutpage': aboutpage}    
     return render(request,'base/about.html', context)
 
+@login_required(login_url='login')
 def databaseForm(request):
-    databases = BookDatabase.objects.all()
+    q = request.GET.get('q') if request.GET.get('q') != None else ''
+
+    databases = BookDatabase.objects.filter(
+        Q(title__icontains=q) |
+        Q(author__icontains=q) |
+        Q(lexile_score__icontains=q) |
+        Q(inventory__icontains=q) 
+    )
+
     row_count = databases.count()
     form = DatabaseForm()
+
 
     if request.method == 'POST':
         form = DatabaseForm(request.POST)
