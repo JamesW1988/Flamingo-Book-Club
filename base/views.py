@@ -39,6 +39,11 @@ def logoutUser(request):
     logout(request)
     return redirect('home')
 
+def userProfile(request,pk):
+    user = User.objects.get(id=pk)
+    context = {'user':user}
+    return render(request, 'base/profile.html', context)
+
 def home(request):
     databases = BookDatabase.objects.all()
     context = {'databases': databases }
@@ -61,6 +66,7 @@ def aboutpage(request, pk):
 
 @login_required(login_url='login')
 def databaseForm(request):
+    page = 'database_form'
     q = request.GET.get('q') if request.GET.get('q') != None else ''
 
     databases = BookDatabase.objects.filter(
@@ -80,5 +86,5 @@ def databaseForm(request):
             form.save()
             return redirect('database-form')
 
-    context = {'form':form,'databases':databases, 'row_count':row_count}
+    context = {'form':form,'databases':databases, 'row_count':row_count, 'page':page }
     return render(request, 'base/database_form.html', context)
