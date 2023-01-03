@@ -51,7 +51,7 @@ def home(request):
 
 def database(request, pk):
     databases = BookDatabase.objects.all()
-    context = {'database': database}
+    context = {'databases': databases}
     return render(request, 'base/database.html', context)
 
 def aboutpage(request, pk):
@@ -72,8 +72,9 @@ def databaseForm(request):
     databases = BookDatabase.objects.filter(
         Q(title__icontains=q) |
         Q(author__icontains=q) |
-        Q(lexile_score__icontains=q) |
-        Q(inventory__icontains=q) 
+        Q(grade_level__icontains=q) |
+        Q(inventory__icontains=q) |
+        Q(condition__icontains=q)
     )
 
     row_count = databases.count()

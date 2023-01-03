@@ -1,20 +1,12 @@
-<style>
-    .header-container{
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-    }
-    .search-box{
-        width: 300px;
-    }
+{% load static %}
 
-</style>
 
 
 
 <div class="header-container">
     <div>
     <a href="{% url 'home' %}">
-        <h1>LOGO</h1>
+        <img src="{% static 'images/Flamingo Book Club Logo.png' %}" width="150" height="200" justify-self ='center'/>
     </a>
     <hr>
     </div>

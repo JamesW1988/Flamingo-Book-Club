@@ -16,7 +16,7 @@
 
 <div class="database-container">
 
-    <div class="form">
+    <div class="dataform">
         <h3>Database Entry</h3>
         <form method="POST" action="" style="width: 100%;">
             {% csrf_token %}
@@ -33,8 +33,12 @@
                 {{ form.description }}
               </div>
               <div>
-                <label for="lexile_score"><strong><br>Lexile Score</strong><br></label>
-                {{ form.lexile_score }}
+                <label for="lexile_score"><strong><br>Grade Level</strong><br></label>
+                {{ form.grade_level }}
+              </div>
+              <div>
+                <label for="condition"><strong><br>Condition</strong><br></label>
+                {{ form.condition }}
               </div>
               <div>
                 <label for="inventory"><strong><br>Inventory</strong><br></label>
@@ -44,7 +48,7 @@
         </form>
     </div>
 
-    <div>      
+    <div class='table-data'>      
         <div>
             <h3>{{ row_count }} Rows</h3>
             <table style="width: 100%;" border="1">
@@ -53,7 +57,7 @@
                         <th>Title</th>
                         <th>Author</th>
                         <th width:80%>Description</th>
-                        <th style="white-space:normal">Lexile Score</th>
+                        <th style="white-space:normal">Grade Level</th>
                         <th>Inventory</th>
                     </tr>
                 </thead>
@@ -63,8 +67,9 @@
                     <td>{{ database.title }}</td>
                     <td>{{ database.author }}</td>
                     <td style="white-space:normal" width: 80%>{{ database.description }}</td>
-                    <td>{{ database.lexile_score }}</td>
+                    <td>{{ database.grade_level }}</td>
                     <td>{{ database.inventory }}</td>
+                    <td>{{ database.condition }}</td>
                 </tr>
                 {% endfor %}
                 </tbody>
