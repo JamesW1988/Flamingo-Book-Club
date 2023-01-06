@@ -8,10 +8,11 @@ from .models import BookDatabase
 from .forms import DatabaseForm
 
 about = [
-    {'id':1, 'name': 'How this got started'},
-    {'id':2, 'name': 'Who is this program for'},
-    {'id':3, 'name': 'Why it is important'},
-] 
+    {'id': 1, 'name': 'How this got started'},
+    {'id': 2, 'name': 'Who is this program for'},
+    {'id': 3, 'name': 'Why it is important'},
+]
+
 
 def loginPage(request):
 
@@ -20,10 +21,10 @@ def loginPage(request):
         password = request.POST.get('password')
 
         try:
-            user = User.objects.get(username = username)
+            user = User.objects.get(username=username)
         except:
             messages.error(request, 'User does not exist')
-        
+
             user = authenticate(request, username=username, password=password)
 
         if user is not None:
@@ -35,34 +36,35 @@ def loginPage(request):
     context = {}
     return render(request, 'base/login_register.html', context)
 
+
 def logoutUser(request):
     logout(request)
     return redirect('home')
 
-def userProfile(request,pk):
+
+def userProfile(request, pk):
     user = User.objects.get(id=pk)
-    context = {'user':user}
+    context = {'user': user}
     return render(request, 'base/profile.html', context)
+
 
 def home(request):
     databases = BookDatabase.objects.all()
-    context = {'databases': databases }
+    context = {'databases': databases}
     return render(request, 'base/home.html', context)
+
 
 def database(request, pk):
     databases = BookDatabase.objects.all()
     context = {'databases': databases}
     return render(request, 'base/database.html', context)
 
-def aboutpage(request, pk):
+
+def aboutpage(request):
     aboutpage = None
+    context = {'aboutpage': aboutpage}
+    return render(request, 'base/about.html', context)
 
-    for i in about:
-        if i['id'] == int(pk):
-            aboutpage = i
-
-    context = {'aboutpage': aboutpage}    
-    return render(request,'base/about.html', context)
 
 @login_required(login_url='login')
 def databaseForm(request):
@@ -80,12 +82,20 @@ def databaseForm(request):
     row_count = databases.count()
     form = DatabaseForm()
 
-
     if request.method == 'POST':
         form = DatabaseForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('database-form')
 
-    context = {'form':form,'databases':databases, 'row_count':row_count, 'page':page }
+    context = {'form': form, 'databases': databases,
+               'row_count': row_count, 'page': page}
     return render(request, 'base/database_form.html', context)
+
+
+""" def sortDatabase(request):
+    sort = BookDatabase.objects.order_by(
+        Q(title__ascending=q)
+    )
+    context = {'sort': sort}
+    return render(request, context) """

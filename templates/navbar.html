@@ -5,16 +5,23 @@
 
 <div class="header-container">
     <div>
-    <a href="{% url 'home' %}">
-        <img src="{% static 'images/Flamingo Book Club Logo.png' %}" width="150" height="200" justify-self ='center'/>
-    </a>
-    <hr>
+        <a href="{% url 'home' %}">
+            <img src="{% static 'images/Flamingo Book Club Logo.png' %}" width="150" height="200"
+                justify-self='center' />
+        </a>
+        <hr>
     </div>
 
-    <div>  
-    
-    
+    <div class="navbar-links">
+        <div><a href="{% url 'home' %}">Home</a></div>
+        <div><a href="{% url 'about' %}">About</a></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
 
+    <div>
+        <!-- profile, login, logout buttons, the profile and login only show when user is logged in  -->
         {% if user.is_authenticated %}
 
         <form method="GET" action="{% url 'user-profile' user.id %}">
@@ -30,21 +37,19 @@
         {% else %}
 
         <a href="{% url 'login' %}">Login</a>
-    {% endif %}
-    <hr>
-    </div>
+        {% endif %}
 
-    <div>
-        {% if page != databaseForm  %}
+        {% comment %} search box only shows on database-form page {% endcomment %}
+        {% if page != databaseForm %}
         <form method="GET" action="{% url 'database-form' %}">
             <input class="search-box" type="text" name="q" placeholder="Search..." />
             <input type="submit" value="Search" />
         </form>
         {% endif %}
-
+        <!-- database-form link button only shows to logged in user and doesn't show on database-form page -->
         {% if user.is_authenticated and page == databaseForm %}
         <form action="{% url 'database-form' %}">
-            <input type="submit" value="Database Form"/>
+            <input type="submit" value="Database Form" />
         </form>
         {% endif %}
         <hr>
