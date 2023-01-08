@@ -12,14 +12,19 @@
         <hr>
     </div>
 
-    <div class="navbar-links">
-        <div><a href="{% url 'home' %}">Home</a></div>
-        <div><a href="{% url 'about' %}">About</a></div>
-        <div></div>
-        <div></div>
-        <div></div>
-    </div>
+    <div id="banner">
+        <div class="navbar-links">
+            <nav>
+                <ul>
 
+                    <li><a href="{% url 'home' %}"> Home </a></li>
+                    <li><a href="{% url 'about' %}"> About </a></li>
+                </ul>
+
+
+            </nav>
+        </div>
+    </div>
     <div>
         <!-- profile, login, logout buttons, the profile and login only show when user is logged in  -->
         {% if user.is_authenticated %}

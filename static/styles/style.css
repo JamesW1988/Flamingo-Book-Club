@@ -1,29 +1,68 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap");
 
+body{
+    font-family: 'DM Sans';
+}
+
 /* navigation bar styles */
 .header-container{
     display: grid;
     grid-template-columns: 1fr 4fr 1fr;
-    background-color: rgb(90, 146, 219);
+    background-color: rgb(240, 132, 216);
     align-items: end;
+    justify-items: auto;
 
 }
-.navbar-links{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+#banner{
+    height: 100%;
+    background-image: url("../images/header-image.png");
+    background-size: auto;
+    background-repeat: no-repeat;
+    position: relative;
+}
 
-    background-color: maroon;
+.navbar-links nav{
+    /* display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr; */
     font-size: 24px;
     font-weight: bold;
     font-kerning: auto;
     color: white;  
-    text-align: center;     
+    text-align: center;
+    align-content: center; 
+    align-self: end;  
+}
+.navbar-links{
+    position: absolute;
+    display: inline;
+    bottom: 0%;
+    left: 0%
+}
+.navbar-links li{
+    background-image: url("../images/navbar_small.png");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat; 
+}
+.navbar-links a{
+    text-decoration: none;
 }
 .navbar-links a:visited{
     color: white;
 }
 .navbar-links a:hover{
     background-color: blue;
+}
+.navbar-links ul{
+    list-style: none;
+}
+.navbar-links li{
+    inherits: none;
+    display: inline;
+    padding-left: 3rem;
+    padding-right: 3rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
 }
 
 .search-box{
