@@ -8,3 +8,4 @@ flamingoBC/settings.py/23
 __pycache__/
 .vscode/settings.json
 *.afphoto
+secret.py

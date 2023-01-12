@@ -1,63 +1,53 @@
 {% load static %}
 
-
-
-
 <div class="header-container">
-    <div>
-        <a href="{% url 'home' %}">
-            <img src="{% static 'images/Flamingo Book Club Logo.png' %}" width="150" height="200"
-                justify-self='center' />
-        </a>
-        <hr>
+  <div>
+    <a href="{% url 'home' %}">
+      <img src="{% static 'images/Flamingo Book Club Logo.png' %}" />
+    </a>
+  </div>
+
+  <div id="banner">
+    <div class="navbar-links">
+      <nav>
+        <ul>
+          <li><a href="{% url 'home' %}"> Home </a></li>
+          <li><a href="{% url 'about' %}"> About </a></li>
+        </ul>
+      </nav>
     </div>
+  </div>
+  <div>
+    <!-- profile, login, logout buttons, the profile and login only show when user is logged in  -->
+    {% if user.is_authenticated %}
 
-    <div id="banner">
-        <div class="navbar-links">
-            <nav>
-                <ul>
+    <form method="GET" action="{% url 'user-profile' user.id %}">
+      <input type="submit" value="Profile" />
+    </form>
 
-                    <li><a href="{% url 'home' %}"> Home </a></li>
-                    <li><a href="{% url 'about' %}"> About </a></li>
-                </ul>
+    <form method="GET" action="{% url 'logout' %}">
+      <input type="submit" value="logout" />
+    </form>
 
+    <p><strong>Hello {{user.username}}</strong></p>
 
-            </nav>
-        </div>
-    </div>
-    <div>
-        <!-- profile, login, logout buttons, the profile and login only show when user is logged in  -->
-        {% if user.is_authenticated %}
+    {% else %}
 
-        <form method="GET" action="{% url 'user-profile' user.id %}">
-            <input type="submit" value="Profile" />
-        </form>
+    <a href="{% url 'login' %}">Login</a>
+    {% endif %}
 
-        <form method="GET" action="{% url 'logout' %}">
-            <input type="submit" value="logout" />
-        </form>
-
-        <p><strong>Hello {{user.username}}</strong></p>
-
-        {% else %}
-
-        <a href="{% url 'login' %}">Login</a>
-        {% endif %}
-
-        {% comment %} search box only shows on database-form page {% endcomment %}
-        {% if page != databaseForm %}
-        <form method="GET" action="{% url 'database-form' %}">
-            <input class="search-box" type="text" name="q" placeholder="Search..." />
-            <input type="submit" value="Search" />
-        </form>
-        {% endif %}
-        <!-- database-form link button only shows to logged in user and doesn't show on database-form page -->
-        {% if user.is_authenticated and page == databaseForm %}
-        <form action="{% url 'database-form' %}">
-            <input type="submit" value="Database Form" />
-        </form>
-        {% endif %}
-        <hr>
-    </div>
-
+    <!-- search box only shows on database-form page -->
+    {% if page != databaseForm %}
+    <form method="GET" action="{% url 'database-form' %}">
+      <input class="search-box" type="text" name="q" placeholder="Search..." />
+      <input type="submit" value="Search" />
+    </form>
+    {% endif %}
+    <!-- database-form link button only shows to logged in user and doesn't show on database-form page -->
+    {% if user.is_authenticated and page == databaseForm %}
+    <form action="{% url 'database-form' %}">
+      <input type="submit" value="Database Form" />
+    </form>
+    {% endif %}
+  </div>
 </div>

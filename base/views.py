@@ -6,6 +6,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.db.models import Q
 from .models import BookDatabase
 from .forms import DatabaseForm
+from django.http import JsonResponse, HttpRequest, HttpResponseRedirect
+
 
 about = [
     {'id': 1, 'name': 'How this got started'},
@@ -54,10 +56,22 @@ def home(request):
     return render(request, 'base/home.html', context)
 
 
-def database(request, pk):
+def database(request):
     databases = BookDatabase.objects.all()
-    context = {'databases': databases}
-    return render(request, 'base/database.html', context)
+    data = []
+
+    for obj in databases:
+        entry = {
+            'title': obj.title,
+            'author': obj.author,
+            'description': obj.description,
+            'grade_level': obj.grade_level,
+            'inventory': obj.inventory,
+        }
+        data.append(entry)
+
+    context = {'data': data}
+    return JsonResponse(context)
 
 
 def aboutpage(request):
@@ -94,8 +108,18 @@ def databaseForm(request):
 
 
 """ def sortDatabase(request):
-    sort = BookDatabase.objects.order_by(
-        Q(title__ascending=q)
-    )
-    context = {'sort': sort}
-    return render(request, context) """
+    if request.method == 'POST':
+        # Get the column and sort order from the request data
+        column = request.POST.get('column')
+        order = request.POST.get('order')
+
+        # Override the default ordering and use the order_by method to sort the queryset
+        if order == 'ascending':
+            queryset = BookDatabase.objects.all().order_by(column)
+        else:
+            queryset = BookDatabase.objects.all().order_by('-' + column)
+
+        # Convert the queryset to a list of dictionaries
+        data = [obj.as_dict() for obj in queryset]
+        # Return the sorted data as a JSON response
+        return JsonResponse(data, safe=False) """

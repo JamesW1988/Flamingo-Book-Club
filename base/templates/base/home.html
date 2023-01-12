@@ -1,32 +1,23 @@
-{% extends 'main.html' %}
-
-
-{% block content %}
+{% extends 'main.html' %} {% block content %}
 
 <style>
-    .home-container{
-        display: grid;
-        grid-template-columns: 1fr 3fr;
-    }
+  .home-container {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+  }
 </style>
 
 <div class="home-container">
+  <div>
+    <h3>Add Database Items</h3>
+  </div>
+
+  <div>
     <div>
-        <h3>Add Database Items</h3>
+      <p id="test"></p>
+      <a href="{% url 'database-form' %}">Database Form</a>
     </div>
-
-    
-
-    <div>      
-            <div>
-                <a href="{% url 'database-form' %}">Database Form</a>
-            </div>
-
-        
-
-    </div>
-
-
+  </div>
 </div>
 
 {% endblock content %}
