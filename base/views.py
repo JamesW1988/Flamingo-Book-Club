@@ -105,21 +105,3 @@ def databaseForm(request):
     context = {'form': form, 'databases': databases,
                'row_count': row_count, 'page': page}
     return render(request, 'base/database_form.html', context)
-
-
-""" def sortDatabase(request):
-    if request.method == 'POST':
-        # Get the column and sort order from the request data
-        column = request.POST.get('column')
-        order = request.POST.get('order')
-
-        # Override the default ordering and use the order_by method to sort the queryset
-        if order == 'ascending':
-            queryset = BookDatabase.objects.all().order_by(column)
-        else:
-            queryset = BookDatabase.objects.all().order_by('-' + column)
-
-        # Convert the queryset to a list of dictionaries
-        data = [obj.as_dict() for obj in queryset]
-        # Return the sorted data as a JSON response
-        return JsonResponse(data, safe=False) """

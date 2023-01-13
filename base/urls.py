@@ -13,5 +13,4 @@ urlpatterns = [
     path('database/', views.database, name="database"),
     path('about/', views.aboutpage, name="about"),
     path('database-form/', views.databaseForm, name="database-form"),
-    # path('sort/', views.sort_database, name='sort_database'),
 ]

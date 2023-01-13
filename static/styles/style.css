@@ -88,3 +88,6 @@ body{
     background-color: rgb(248, 215, 221);
     
 }
+#table-head{
+    background-color: rgb(158, 45, 107) !important;
+}

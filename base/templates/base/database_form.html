@@ -52,27 +52,18 @@
   <div class='table-data'>
     <div>
       <h3>{{ row_count }} Rows</h3>
-      <table>
-        <thead style="margin: auto;">
+      <table class="table table-hover cell-border table-striped" id="book-table" data-page-length="100">
+        <thead id="table-head">
           <tr>
             <th>Title</th>
             <th>Author</th>
             <th width:80%>Description</th>
-            <th style="white-space:normal">Grade Level</th>
+            <th style=" white-space:normal">Grade Level</th>
             <th>Inventory</th>
           </tr>
         </thead>
         <tbody class="table-body" id="row-data">
-          <!--           {% for database in databases %}
-          <tr>
-            <td>{{ database.title }}</td>
-            <td>{{ database.author }}</td>
-            <td style="white-space:normal" width: 80%>{{ database.description }}</td>
-            <td>{{ database.grade_level }}</td>
-            <td>{{ database.inventory }}</td>
-            <td>{{ database.condition }}</td>
-          </tr>
-          {% endfor %} -->
+
         </tbody>
       </table>
     </div>
