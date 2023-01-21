@@ -51,11 +51,10 @@ def userProfile(request, pk):
 
 
 def home(request):
-    databases = BookDatabase.objects.all()
-    context = {'databases': databases}
-    return render(request, 'base/home.html', context)
+    return render(request, 'base/home.html')
 
 
+@login_required(login_url='login')
 def database(request):
     databases = BookDatabase.objects.all()
     data = []
@@ -89,8 +88,7 @@ def databaseForm(request):
         Q(title__icontains=q) |
         Q(author__icontains=q) |
         Q(grade_level__icontains=q) |
-        Q(inventory__icontains=q) |
-        Q(condition__icontains=q)
+        Q(inventory__icontains=q)
     )
 
     row_count = databases.count()

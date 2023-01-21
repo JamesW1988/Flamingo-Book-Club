@@ -2,71 +2,61 @@
 
 {% block content %}
 
-<style>
-  .database-container {
-    display: grid;
-    grid-template-columns: 1fr 5fr;
-
-  }
-
-  form {
-    width: 100%;
-  }
-</style>
 
 
 <div class="database-container">
 
-  <div class="dataform">
+  <div class="dataform-container ps-3 pe-3 collapse" id="input-form">
     <h3>Database Entry</h3>
-    <form method="POST" action="" id="database-form" style="width: 100%;">
+    <form method="POST" action="" id="database-form">
       {% csrf_token %}
-      <div>
-        <label for="title"><strong>Title<div class="arrow"></div></strong><br></label>
-        {{ form.title }}
+      <div class="form-group mb-3">
+        <label for="title" class="form-label"><strong>Title</strong></label>
+        <input type="text" class="form-control mb" id="title" name="title" required>
       </div>
-      <div>
-        <label for="author"><strong><br>Author</strong><br></label>
-        {{ form.author }}
+      <div class="form-group mb-3">
+        <label for="author" class="form-label"><strong>Author</strong></label>
+        <input type="text" class="form-control" id="author" name="author" required>
       </div>
-      <div>
-        <label for="description"><strong><br>Description</strong><br></label>
-        {{ form.description }}
+      <div class="form-group mb-3">
+        <label for="description" class="form-label"><strong>Description</strong></label>
+        <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
       </div>
-      <div>
-        <label for="lexile_score"><strong><br>Grade Level</strong><br></label>
-        {{ form.grade_level }}
+      <div class="form-group mb-3">
+        <label for="grade_level" class="form-label"><strong>Grade Level</strong></label>
+        <input type="text" class="form-control" id="grade_level" name="grade_level" required>
       </div>
-      <div>
-        <label for="condition"><strong><br>Condition</strong><br></label>
-        {{ form.condition }}
+      <div class="form-group mb-3">
+        <label for="inventory" class="form-label"><strong>Inventory</strong></label>
+        <input type="number" class="form-control" id="inventory" name="inventory" required>
       </div>
-      <div>
-        <label for="inventory"><strong><br>Inventory</strong><br></label>
-        {{ form.inventory }}<p></p>
-      </div>
-      <input type="submit" value="Submit" />
+      <input type="submit" value="Submit" class="btn btn-primary mb-3">
     </form>
   </div>
 
-  <div class='table-data'>
+
+
+  <div class='table-data pt-1'>
     <div>
-      <h3>{{ row_count }} Rows</h3>
-      <table class="table table-hover cell-border table-striped" id="book-table" data-page-length="100">
+      <button id="custom-btn" type="button" data-bs-toggle="collapse" data-bs-target="#input-form">Form</button>
+      <table class="table hover table-bordered border-secondary stripe order-column" id="book-table"
+        data-page-length="100">
         <thead id="table-head">
           <tr>
-            <th>Title</th>
-            <th>Author</th>
-            <th width:80%>Description</th>
-            <th style=" white-space:normal">Grade Level</th>
-            <th>Inventory</th>
+            <th class="text-center">Title</th>
+            <th class="text-center">Author</th>
+            <th class="text-center">Description</th>
+            <th class="text-center">Grade Level</th>
+            <th class="text-center">Inventory</th>
           </tr>
         </thead>
-        <tbody class="table-body" id="row-data">
+        <tbody class="table-body" scope="row" id="row-data">
 
         </tbody>
       </table>
     </div>
 
+
   </div>
-  {% endblock content %}
+</div>
+{% endblock content %}

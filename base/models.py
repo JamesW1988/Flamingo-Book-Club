@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -10,18 +11,12 @@ class BookDatabase(models.Model):
     author = models.CharField(max_length=100)
     description = models.TextField(null=True, blank=True)
     grade_level = models.CharField(max_length=10, null=True, blank=True)
-    condition = models.CharField(max_length=10, null=True, blank=True, choices=(
-        ('Good', 'Good'),
-        ('Fair', 'Fair'),
-        ('Poor', 'Poor'),
-    ))
+    lexile_score = models.IntegerField
     inventory = models.IntegerField()
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
-
-    # orders the database by ascending title then author
-    class Meta:
-        ordering = ['title', 'author']
+    modified_by = models.ForeignKey(
+        User, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         return self.title
@@ -32,8 +27,14 @@ class BookDatabase(models.Model):
             'author': self.author,
             'description': self.description,
             'grade_level': self.grade_level,
-            'condition': self.condition,
             'inventory': self.inventory,
             'updated': self.updated,
             'created': self.created
         }
+
+
+class LexileData(models.Model):
+    ISBN = models.IntegerField()
+    title = models.CharField(max_length=100)
+    author = models.CharField(max_length=100)
+    lexile_score = models.IntegerField()
